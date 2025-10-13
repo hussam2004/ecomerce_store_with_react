@@ -1,0 +1,23 @@
+.swiper-button-prev,
+.swiper-button-next {
+  display: inline;
+  background-color: white;
+  border: 1px solid black;
+}
+.swiper-button-next {
+  background-color: yellowgreen;
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+}
+
+.nextButton,
+.prevButton {
+  width: 46px;
+  height: 46px;
+  border-radius: 23px;
+  transform: translate(0, -30px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
