@@ -71,7 +71,7 @@ export function CartSection() {
   // Function to load data and calculate totals from local storage
   const loadCartTotals = useCallback(() => {
     const cartStorage = dataStorage("cart");
-    const currentCart = cartStorage.get() || [];
+    const currentCart = cartStorage.get() as any[] || [];
 
     // 2. Check and set the empty state
     const empty = currentCart.length === 0;
