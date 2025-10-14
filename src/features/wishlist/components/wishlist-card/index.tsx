@@ -1,5 +1,6 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { getAssetPath } from "../../../../utils/assets";
 export function WishListCard() {
   return (
     <Stack gap={1} width="100%" maxWidth={270}>
@@ -46,7 +47,7 @@ export function WishListCard() {
             >
               <Box
                 component={"img"}
-                src="/wishlist-assets/trash-icon.svg"
+                src={getAssetPath("wishlist-assets/trash-icon.svg")}
                 sx={
                   {
                     // p: 3,

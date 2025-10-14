@@ -1,6 +1,7 @@
 
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
+import { getAssetPath } from "../../../../utils/assets";
 
 export function SpeacialOfferSection({ targetDate }: { targetDate: Date }) {
   const [timeLeft, setTimeLeft] = useState(getTimeRemaining(targetDate));
@@ -173,7 +174,7 @@ export function SpeacialOfferSection({ targetDate }: { targetDate: Date }) {
         >
           <Box 
             component={"img"} 
-            src="/enhance-offer.png" 
+            src={getAssetPath("enhance-offer.png")} 
             sx={{
               width: "100%",
               height: "100%",

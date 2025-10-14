@@ -5,6 +5,7 @@ import AppleIcon from "@mui/icons-material/Apple";
 import CircleOutlinedIcon from "@mui/icons-material/CircleOutlined";
 import CircleIcon from "@mui/icons-material/Circle";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import { getAssetPath } from "../../../../utils/assets";
 export function HeroSection() {
   return (
     <>
@@ -112,7 +113,7 @@ export function HeroSection() {
             </Stack>
             <Box
               component={"img"}
-              src="/hero-image.png"
+              src={getAssetPath("hero-image.png")}
               sx={{
                 width: { xs: "80%", sm: "50%", md: "50%" },
                 maxWidth: 300,

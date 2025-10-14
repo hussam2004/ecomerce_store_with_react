@@ -11,6 +11,7 @@ import {
   Typography,
   Checkbox,
 } from "@mui/material";
+import { getAssetPath } from "../../../../utils/assets";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { checkoutSchema } from "./config"; // adjust path if needed
@@ -247,10 +248,10 @@ export function CheckOutPage() {
                 pr={{ xs: 0, lg: 18 }}
                 justifyContent={{ xs: "center", sm: "flex-start" }}
               >
-                <Box component="img" src="/payment-methods/1.svg" height={35} />
-                <Box component="img" src="/payment-methods/2.svg" height={35} />
-                <Box component="img" src="/payment-methods/3.svg" height={35} />
-                <Box component="img" src="/payment-methods/4.svg" height={35} />
+                <Box component="img" src={getAssetPath("payment-methods/1.svg")} height={35} />
+                <Box component="img" src={getAssetPath("payment-methods/2.svg")} height={35} />
+                <Box component="img" src={getAssetPath("payment-methods/3.svg")} height={35} />
+                <Box component="img" src={getAssetPath("payment-methods/4.svg")} height={35} />
               </Stack>
             </Stack>
 

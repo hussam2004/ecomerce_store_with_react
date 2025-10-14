@@ -3,6 +3,7 @@ import { Box, Stack } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import { Footer } from "../components/footer";
 import { NavBar } from "../components/nav-bar";
+import { getAssetPath } from "../../../utils/assets";
 // import { Margin } from "@mui/icons-material";
 
 export function AuthLayout() {
@@ -22,7 +23,7 @@ export function AuthLayout() {
             {/* <img src="/auth-image.png" alt="" width="45%" style={{}} /> */}
             <Box
               component={"img"}
-              src="/auth-image.png"
+              src={getAssetPath("auth-image.png")}
               sx={{
                 width: "45%",
                 display: {

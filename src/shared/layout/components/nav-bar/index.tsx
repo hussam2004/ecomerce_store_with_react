@@ -13,6 +13,7 @@ import {
   useTheme,
   Button,
 } from "@mui/material";
+import { getAssetPath } from "../../../../utils/assets";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteBorderSharpIcon from "@mui/icons-material/FavoriteBorderSharp";
 import SearchSharpIcon from "@mui/icons-material/SearchSharp";
@@ -110,7 +111,7 @@ export function NavBar() {
         {/* Logo */}
         <Box
           component="img"
-          src="/logo.png"
+          src={getAssetPath("logo.png")}
           sx={{
             height: { xs: 18, sm: 20 },
             cursor: "pointer",

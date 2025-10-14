@@ -4,5 +4,5 @@ import svgr from "@svgr/rollup";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), svgr()],
-  base: "/",
+  base: "/ecomerce_store_with_react/",
 });

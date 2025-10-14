@@ -9,6 +9,7 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
+import { getAssetPath } from "../../../../utils/assets";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -116,7 +117,7 @@ export function ProductCard({
                   >
                     <Box
                       component="img"
-                      src="/wishlist-assets/trash-icon.svg"
+                      src={getAssetPath("wishlist-assets/trash-icon.svg")}
                       width={20}
                       height={20}
                     />

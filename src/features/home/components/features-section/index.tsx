@@ -1,4 +1,5 @@
 import { Box, Stack, Typography } from "@mui/material";
+import { getAssetPath } from "../../../../utils/assets";
 
 export function FeaturesSection() {
   return (
@@ -12,11 +13,11 @@ export function FeaturesSection() {
       <Stack alignItems={"center"}>
         <Box
           width={70}
-          height={70} // Set a height so background is visible
+          height={70}
           mb={2}
           sx={{
             position: "relative",
-            backgroundImage: 'url("/home-features-icons/1.svg")',
+            backgroundImage: `url(${getAssetPath("home-features-icons/1.svg")})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             backgroundSize: "cover",
@@ -24,7 +25,7 @@ export function FeaturesSection() {
         >
           <Box
             component="img"
-            src="/home-features-icons/icon1.svg"
+            src={getAssetPath("home-features-icons/icon1.svg")}
             width={30}
             sx={{
               position: "absolute",
@@ -51,11 +52,11 @@ export function FeaturesSection() {
       <Stack alignItems={"center"}>
         <Box
           width={70}
-          height={70} // Set a height so background is visible
+          height={70}
           mb={2}
           sx={{
             position: "relative",
-            backgroundImage: 'url("/home-features-icons/2.svg")',
+            backgroundImage: `url(${getAssetPath("home-features-icons/2.svg")})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             backgroundSize: "cover",
@@ -63,7 +64,7 @@ export function FeaturesSection() {
         >
           <Box
             component="img"
-            src="/home-features-icons/icon2.svg"
+            src={getAssetPath("home-features-icons/icon2.svg")}
             width={30}
             sx={{
               position: "absolute",
@@ -88,11 +89,11 @@ export function FeaturesSection() {
       <Stack alignItems={"center"}>
         <Box
           width={70}
-          height={70} // Set a height so background is visible
+          height={70}
           mb={2}
           sx={{
             position: "relative",
-            backgroundImage: 'url("/home-features-icons/1.svg")',
+            backgroundImage: `url(${getAssetPath("home-features-icons/1.svg")})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             backgroundSize: "cover",
@@ -100,7 +101,7 @@ export function FeaturesSection() {
         >
           <Box
             component="img"
-            src="/home-features-icons/icon3svg.svg"
+            src={getAssetPath("home-features-icons/icon3svg.svg")}
             width={30}
             sx={{
               position: "absolute",

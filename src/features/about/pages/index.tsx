@@ -5,6 +5,7 @@ import { Stack, Box } from "@mui/material";
 import CurrentRoute from "../components/current-route";
 import Typography from "@mui/material/Typography";
 import { FeaturesSection } from "../../home/components/features-section";
+import { getAssetPath } from "../../../utils/assets";
 import { ReactComponent as Icon2 } from "../../../../public/about-icons/5.svg";
 import { ReactComponent as Icon1 } from "../../../../public/about-icons/1.svg";
 import { ReactComponent as Icon3 } from "../../../../public/about-icons/3.svg";
@@ -48,7 +49,7 @@ export default function AboutPage() {
         </Stack>
         <Box
           component={"img"}
-          src="/about1.png"
+          src={getAssetPath("about1.png")}
           marginLeft={{ xs: 0, md: "auto" }}
           width={{ xs: "100%", md: "50%" }}
           height={{ xs: 250, sm: 350, md: 450 }}
@@ -81,7 +82,7 @@ export default function AboutPage() {
         >
           <Box
             sx={{
-              backgroundImage: 'url("/home-features-icons/1.svg")',
+              backgroundImage: `url(${getAssetPath("home-features-icons/1.svg")})`,
               height: 100,
               width: 100,
               backgroundPosition: "center",
@@ -110,7 +111,7 @@ export default function AboutPage() {
         >
           <Box
             sx={{
-              backgroundImage: 'url("/home-features-icons/1.svg")',
+              backgroundImage: `url(${getAssetPath("home-features-icons/1.svg")})`,
               height: 100,
               width: 100,
               backgroundPosition: "center",
@@ -140,7 +141,7 @@ export default function AboutPage() {
         >
           <Box
             sx={{
-              backgroundImage: 'url("/home-features-icons/1.svg")',
+              backgroundImage: `url(${getAssetPath("home-features-icons/1.svg")})`,
               height: 100,
               width: 100,
               backgroundPosition: "center",
@@ -169,7 +170,7 @@ export default function AboutPage() {
         >
           <Box
             sx={{
-              backgroundImage: 'url("/home-features-icons/1.svg")',
+              backgroundImage: `url(${getAssetPath("home-features-icons/1.svg")})`,
               height: 100,
               width: 100,
               backgroundPosition: "center",
@@ -204,7 +205,7 @@ export default function AboutPage() {
         <Stack gap={1} alignItems="center">
           <Box
             component={"img"}
-            src="/about-page-emp/1.png"
+            src={getAssetPath("about-page-emp/1.png")}
             width={{ xs: 200, sm: 250, md: 270 }}
             height={{ xs: 250, sm: 300, md: 330 }}
             sx={{ objectFit: "cover", borderRadius: 2 }}
@@ -229,7 +230,7 @@ export default function AboutPage() {
         <Stack gap={1} alignItems="center">
           <Box
             component={"img"}
-            src="/about-page-emp/2.png"
+            src={getAssetPath("about-page-emp/2.png")}
             width={{ xs: 200, sm: 250, md: 270 }}
             height={{ xs: 250, sm: 300, md: 330 }}
             sx={{ objectFit: "cover", borderRadius: 2 }}
@@ -254,7 +255,7 @@ export default function AboutPage() {
         <Stack gap={1} alignItems="center">
           <Box
             component={"img"}
-            src="/about-page-emp/3.png"
+            src={getAssetPath("about-page-emp/3.png")}
             width={{ xs: 200, sm: 250, md: 270 }}
             height={{ xs: 250, sm: 300, md: 330 }}
             sx={{ objectFit: "cover", borderRadius: 2 }}

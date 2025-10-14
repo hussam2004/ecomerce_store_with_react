@@ -1,5 +1,7 @@
 import { Stack, Box, Divider } from "@mui/material";
 import Typography from "@mui/material/Typography";
+import { getAssetPath } from "../../../../utils/assets";
+
 export function ContactCard() {
   return (
     <>
@@ -26,7 +28,7 @@ export function ContactCard() {
               justifyContent={"center"}
               alignItems={"center"}
             >
-              <Box component={"img"} src="/contact-assets/phone-icon.svg" />
+              <Box component={"img"} src={getAssetPath("contact-assets/phone-icon.svg")} />
             </Box>
             <Typography fontSize={16} fontWeight={"700"} color="initial">
               Call To Us
@@ -52,7 +54,7 @@ export function ContactCard() {
               justifyContent={"center"}
               alignItems={"center"}
             >
-              <Box component={"img"} src="/contact-assets/phone-icon.svg" />
+              <Box component={"img"} src={getAssetPath("contact-assets/phone-icon.svg")} />
             </Box>
             <Typography fontSize={16} fontWeight={"700"} color="initial">
               Write To US

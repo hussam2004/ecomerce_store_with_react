@@ -1,5 +1,6 @@
 // import { FindReplace } from "@mui/icons-material";
 import { Stack, Box, Typography } from "@mui/material";
+import { getAssetPath } from "../../../../utils/assets";
 
 export function DNewArivalSection() {
   return (
@@ -64,78 +65,6 @@ export function DNewArivalSection() {
   );
 }
 
-// import { Box, Grid, Typography, Button } from "@mui/material";
-
-// const promoItems = [
-//   {
-//     title: "PlayStation 5",
-//     description: "Black and White version of the PS5 coming out on sale.",
-//     image: "/images/ps5.png", // replace with actual image path
-//   },
-//   {
-//     title: "Women’s Collections",
-//     description: "Featured woman collections that give you another vibe.",
-//     image: "/images/women-collection.png",
-//   },
-//   {
-//     title: "Speakers",
-//     description: "Amazon wireless speakers",
-//     image: "/images/speakers.png",
-//   },
-//   {
-//     title: "Perfume",
-//     description: "GUCCI INTENSE OUD EDP",
-//     image: "/images/perfume.png",
-//   },
-// ];
-
-// export function NewAribalSection() {
-//   return (
-//     <Box px={4} py={6}>
-//       <Grid container spacing={4}>
-//         {promoItems.map((item, index) => (
-//           <Grid item xs={12} sm={6} key={index}>
-//             <Box
-//               sx={{
-//                 backgroundColor: "#f5f5f5",
-//                 borderRadius: 2,
-//                 overflow: "hidden",
-//                 height: "100%",
-//                 display: "flex",
-//                 flexDirection: "column",
-//                 justifyContent: "space-between",
-//                 p: 3,
-//               }}
-//             >
-//               <Box
-//                 component="img"
-//                 src={item.image}
-//                 alt={item.title}
-//                 sx={{
-//                   width: "100%",
-//                   height: 200,
-//                   objectFit: "cover",
-//                   borderRadius: 2,
-//                   mb: 2,
-//                 }}
-//               />
-//               <Typography variant="h6" fontWeight="bold" gutterBottom>
-//                 {item.title}
-//               </Typography>
-//               <Typography variant="body2" color="text.secondary" mb={2}>
-//                 {item.description}
-//               </Typography>
-//               <Button variant="contained" sx={{ alignSelf: "start" }}>
-//                 Shop Now
-//               </Button>
-//             </Box>
-//           </Grid>
-//         ))}
-//       </Grid>
-//     </Box>
-//   );
-// }
-
 export function NewArivalSection() {
   return (
     <>
@@ -153,7 +82,7 @@ export function NewArivalSection() {
           >
             <Box 
               component={"img"} 
-              src="/ps5.png" 
+              src={getAssetPath("ps5.png")} 
               sx={{
                 width: { xs: "80%", sm: "70%", lg: "auto" },
                 height: { xs: "80%", sm: "70%", lg: "auto" },
@@ -194,11 +123,11 @@ export function NewArivalSection() {
               </Typography>
             </Stack>
           </Box>
-          <Stack width={{ xs: "100%", lg: "50%" }} height={"100%"} gap={1}>
+          <Stack width={{ xs: "100%", lg: "50%" }} height={{ xs: "auto", lg: "100%" }} gap={1}>
             <Box width={"100%"} height={{ xs: 250, sm: 350, lg: 290 }} position={"relative"} borderRadius={1} overflow="hidden">
               <Box
                 component={"img"}
-                src="/woman.png"
+                src={getAssetPath("woman.png")}
                 width={"100%"}
                 height={"100%"}
                 bgcolor={"black"}
@@ -209,20 +138,29 @@ export function NewArivalSection() {
               />
               <Stack
                 left={0}
-                width={400}
-                p={3}
-                gap={2}
+                width={{ xs: "90%", sm: 400 }}
+                p={{ xs: 2, sm: 3 }}
+                gap={{ xs: 1, sm: 2 }}
                 bottom={0}
                 position={"absolute"}
               >
-                <Typography fontSize={30} fontWeight={"700"} color="white">
-                  Women’s Collections
+                <Typography 
+                  fontSize={{ xs: 18, sm: 24, md: 30 }} 
+                  fontWeight={"700"} 
+                  color="white"
+                >
+                  Women's Collections
                 </Typography>
-                <Typography color="white">
+                <Typography 
+                  color="white"
+                  fontSize={{ xs: 12, sm: 14, md: 16 }}
+                  sx={{ display: { xs: "none", sm: "block" } }}
+                >
                   Featured woman collections that give you another vibe.
                 </Typography>
                 <Typography
                   color="white"
+                  fontSize={{ xs: 12, sm: 14, md: 16 }}
                   sx={{
                     textDecoration: "underline",
                     cursor: "pointer",
@@ -235,7 +173,7 @@ export function NewArivalSection() {
             <Stack width={"100%"} height={{ xs: 400, sm: 300, lg: 290 }} direction={{ xs: "column", sm: "row" }} gap={2}>
               <Box
                 width={{ xs: "100%", sm: "50%" }}
-                height={{ xs: 150, sm: "100%" }}
+                height={{ xs: 200, sm: "100%" }}
                 bgcolor={"black"}
                 display={"flex"}
                 justifyContent={"center"}
@@ -245,7 +183,7 @@ export function NewArivalSection() {
               >
                 <Box
                   component={"img"}
-                  src="/speakers.png"
+                  src={getAssetPath("speakers.png")}
                   sx={{
                     width: { xs: "60%", sm: "auto" },
                     height: { xs: "60%", sm: "auto" },
@@ -288,7 +226,7 @@ export function NewArivalSection() {
               </Box>
               <Box
                 width={{ xs: "100%", sm: "50%" }}
-                height={{ xs: 150, sm: "100%" }}
+                height={{ xs: 200, sm: "100%" }}
                 bgcolor={"black"}
                 display={"flex"}
                 justifyContent={"center"}
@@ -298,7 +236,7 @@ export function NewArivalSection() {
               >
                 <Box
                   component={"img"}
-                  src="/perfume.png"
+                  src={getAssetPath("perfume.png")}
                   sx={{
                     width: { xs: "60%", sm: "auto" },
                     height: { xs: "60%", sm: "auto" },

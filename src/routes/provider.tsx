@@ -55,7 +55,9 @@ const routes = [
   },
 ];
 
-const router = createBrowserRouter(routes);
+const router = createBrowserRouter(routes, {
+  basename: "/ecomerce_store_with_react"
+});
 
 export function AppRouterProvider() {
   return <RouterProvider router={router} />;

@@ -39,12 +39,7 @@ import { useNavigate } from "react-router-dom";
 // };
 // --- END: MOCK COMPONENTS ---
 
-// MOCK dataStorage utility for runnable example
-const dataStorage = (key: string) => ({
-  get: () => JSON.parse(localStorage.getItem(key) || '[]'),
-  set: (data: any) => localStorage.setItem(key, JSON.stringify(data)),
-  remove: () => localStorage.removeItem(key),
-});
+import { dataStorage } from "../../../../lib/storage";
 
 // --- CART TOTALS CALCULATION LOGIC ---
 const SHIPPING_COST = 0; // Fixed shipping cost
@@ -53,7 +48,7 @@ const calculateTotals = (cart: any[]) => {
   // Calculate the subtotal by iterating over all items
   const subtotal = cart.reduce((sum: number, item: any) => {
     const price = Number(item.price) || 0;
-    const quantity = Number(item.quantity) || 0;
+    const quantity = Number(item.quantity) || 1; // Default to 1 if no quantity
     return sum + (price * quantity);
   }, 0);
 
