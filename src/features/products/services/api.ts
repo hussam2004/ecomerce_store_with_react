@@ -15,12 +15,12 @@ class ProductService {
     return response.data;
   }
 
-  async details(id: number) {
+  async details(id: string | undefined) {
     const response = await httpClient.get(this.#endpoint + `/${id}`);
     return response.data;
   }
 
-  async getRelayedProducts(id: number) {
+  async getRelayedProducts(id: string|undefined) {
     const response = await httpClient.get(this.#endpoint + `/${id}/related`);
     return response.data;
   }

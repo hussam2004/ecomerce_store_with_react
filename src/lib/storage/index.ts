@@ -1,22 +1,29 @@
-function checkIsBrowser() {
-    return typeof window !== 'undefined'
+function checkIsBrowser(): boolean {
+  return typeof window !== "undefined";
 }
 
-const defaultGetStorage = () => (checkIsBrowser() ? localStorage : null);
+type StorageGetter = () => Storage | null;
+
+const defaultGetStorage: StorageGetter = () =>
+  checkIsBrowser() ? localStorage : null;
 
 export const dataStorage = (
-  key,
-  getStorage = defaultGetStorage
+  key: string,
+  getStorage: StorageGetter = defaultGetStorage
 ) => {
   const storage = getStorage();
-  return {
-    set: (data) => {
-      return typeof window !== 'undefined' && storage.setItem(key, JSON.stringify(data));
-    },
-    get: () => {
-      if (typeof window === 'undefined') return undefined;
-      const json = storage.getItem(key);
 
+  return {
+    set: (data: unknown): void => {
+      if (checkIsBrowser() && storage) {
+        storage.setItem(key, JSON.stringify(data));
+      }
+    },
+
+    get: (): unknown | undefined => {
+      if (!checkIsBrowser() || !storage) return undefined;
+
+      const json = storage.getItem(key);
       if (!json) return undefined;
 
       try {
@@ -25,11 +32,14 @@ export const dataStorage = (
         return json;
       }
     },
-    remove: () => {
-      return typeof window !== 'undefined' && storage.removeItem(key);
+
+    remove: (): void => {
+      if (checkIsBrowser() && storage) {
+        storage.removeItem(key);
+      }
     },
   };
 };
 
-export const dataSessionStorage = (key) =>
-  dataStorage(key, () => sessionStorage);
+export const dataSessionStorage = (key: string) =>
+  dataStorage(key, () => (checkIsBrowser() ? sessionStorage : null));

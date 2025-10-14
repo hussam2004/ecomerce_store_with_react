@@ -27,12 +27,23 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <Stack width="100%" pr={20} pt={5} pl={5} gap={3} height="100%">
-        <Stack direction="row" justifyContent="space-around" gap={2}>
+      <Stack 
+        width="100%" 
+        pr={{ xs: 2, sm: 4, md: 20 }} 
+        pt={5} 
+        pl={{ xs: 2, sm: 4, md: 5 }} 
+        gap={3} 
+        height="100%"
+      >
+        <Stack 
+          direction={{ xs: "column", md: "row" }} 
+          justifyContent="space-around" 
+          gap={2}
+        >
           <TextField
             label="Your Name *"
             variant="outlined"
-            sx={{ width: "30%" }}
+            sx={{ width: { xs: "100%", md: "30%" } }}
             {...register("name")}
             error={!!errors.name}
             helperText={errors.name?.message}
@@ -40,7 +51,7 @@ export function ContactForm() {
           <TextField
             label="Your Email *"
             variant="outlined"
-            sx={{ width: "30%" }}
+            sx={{ width: { xs: "100%", md: "30%" } }}
             {...register("email")}
             error={!!errors.email}
             helperText={errors.email?.message}
@@ -48,7 +59,7 @@ export function ContactForm() {
           <TextField
             label="Your Phone *"
             variant="outlined"
-            sx={{ width: "30%" }}
+            sx={{ width: { xs: "100%", md: "30%" } }}
             {...register("phone")}
             error={!!errors.phone}
             helperText={errors.phone?.message}
@@ -57,7 +68,7 @@ export function ContactForm() {
 
         <TextField
           label="Your Message"
-          sx={{ px: 1, width: "100%" }}
+          sx={{ px: { xs: 0, sm: 1 }, width: "100%" }}
           multiline
           minRows={6}
           {...register("message")}
@@ -71,9 +82,9 @@ export function ContactForm() {
             textTransform: "none",
             mb: "auto",
             bgcolor: "#DB4444",
-            width: 200,
+            width: { xs: "100%", sm: 200 },
             height: 50,
-            ml: "auto",
+            ml: { xs: 0, sm: "auto" },
           }}
           variant="contained"
         >

@@ -3,9 +3,7 @@ import {
   Typography,
   TextField,
   InputAdornment,
-  Select,
   MenuItem,
-  FormControl,
   Box,
   IconButton,
   Menu,
@@ -13,6 +11,7 @@ import {
   Divider,
   useMediaQuery,
   useTheme,
+  Button,
 } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import FavoriteBorderSharpIcon from "@mui/icons-material/FavoriteBorderSharp";
@@ -26,6 +25,8 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../../../features/auth/store";
 import { useState } from "react";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 
 const navItems = [
   { label: "Home", path: "/" },
@@ -43,6 +44,7 @@ export function NavBar() {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const open = Boolean(anchorEl);
 
   const handleProfileClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -57,7 +59,7 @@ export function NavBar() {
     <Stack position="fixed" top={0} zIndex={100} width="100%">
       {/* Top Banner */}
       <Stack
-        direction={{ xs: "column", sm: "row" }}
+        direction={"row"}
         justifyContent="center"
         alignItems="center"
         bgcolor="black"
@@ -68,42 +70,62 @@ export function NavBar() {
       >
         <Typography textAlign="center" fontSize={{ xs: 12, sm: 14 }}>
           Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!
+          <span
+            style={{
+              color: "white",
+              textDecoration: "underline",
+              cursor: "pointer",
+              marginLeft: "6px",
+            }}
+          >
+            ShopNow
+          </span>
         </Typography>
-        <Typography
+        {/* <Typography
           color="white"
           sx={{ textDecoration: "underline", cursor: "pointer" }}
         >
           ShopNow
-        </Typography>
-        <FormControl sx={{ width: 100 }}>
+        </Typography> */}
+        {/* <FormControl sx={{ width: 100 }}>
           <Select defaultValue="English">
             <MenuItem value="English">English</MenuItem>
             <MenuItem value="Arabic">Arabic</MenuItem>
           </Select>
-        </FormControl>
+        </FormControl> */}
       </Stack>
 
       {/* Main Navbar */}
       <Stack
-        direction={{ xs: "column", sm: "row" }}
+        direction="row"
         justifyContent="space-between"
         alignItems="center"
         px={{ xs: 2, sm: 4, md: 10 }}
         py={2}
         boxShadow={1}
         bgcolor="white"
-        spacing={{ xs: 2, sm: 0 }}
+        position="relative"
+        minHeight={72}
       >
         {/* Logo */}
-        <Box component="img" src="/logo.png" sx={{ height: 20 }} />
+        <Box
+          component="img"
+          src="/logo.png"
+          sx={{
+            height: { xs: 18, sm: 20 },
+            cursor: "pointer",
+          }}
+          onClick={() => navigate("/")}
+        />
 
-        {/* Navigation Links */}
+        {/* Desktop Navigation Links */}
         <Stack
-          direction={{ xs: "column", sm: "row" }}
-          spacing={2}
+          direction="row"
+          spacing={3}
           alignItems="center"
+          sx={{ display: { xs: "none", md: "flex" } }}
         >
-          {navItems.map((item) => {
+          {navItems.slice(0, 3).map((item) => {
             const isActive = location.pathname === item.path;
             return (
               <Typography
@@ -111,10 +133,14 @@ export function NavBar() {
                 onClick={() => navigate(item.path)}
                 sx={{
                   cursor: "pointer",
-                  borderBottom: isActive ? "2px solid rgba(0,0,0,0.3)" : "none",
+                  borderBottom: isActive ? "2px solid #DB4444" : "none",
                   color: "text.primary",
+                  fontSize: 16,
+                  fontWeight: isActive ? 500 : 400,
+                  pb: 0.5,
+                  transition: "all 0.2s ease",
                   "&:hover": {
-                    color: "rgba(0,0,0,0.3)",
+                    color: "#DB4444",
                   },
                 }}
               >
@@ -124,103 +150,271 @@ export function NavBar() {
           })}
         </Stack>
 
-        {/* Icons Section */}
-        <Stack
-          direction="row"
-          spacing={2}
-          alignItems="center"
-          flexWrap="wrap"
-          justifyContent={{ xs: "center", sm: "flex-end" }}
-        >
+        {/* Right Side Icons and Actions */}
+        <Stack direction="row" alignItems="center" spacing={1}>
+          {/* Search - Desktop Only */}
           {!isMobile && (
             <TextField
               id="search"
-              label="Search"
+              placeholder="What are you looking for?"
               variant="outlined"
               size="small"
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position="start">
-                    <SearchSharpIcon />
+                  <InputAdornment position="end">
+                    <SearchSharpIcon sx={{ color: "text.secondary" }} />
                   </InputAdornment>
                 ),
+                sx: {
+                  backgroundColor: "#F5F5F5",
+                  borderRadius: 1,
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    border: "none",
+                  },
+                },
               }}
-              sx={{ minWidth: 150 }}
+              sx={{ width: 240 }}
             />
           )}
 
-          <FavoriteBorderSharpIcon
+          {/* Action Icons */}
+          <IconButton
             onClick={() => navigate("/wishlist")}
-            sx={{ cursor: "pointer" }}
-          />
-          <ShoppingCartIcon
+            sx={{
+              p: 1,
+              "&:hover": { backgroundColor: "rgba(219, 68, 68, 0.1)" },
+            }}
+          >
+            <FavoriteBorderSharpIcon sx={{ fontSize: 24 }} />
+          </IconButton>
+
+          <IconButton
             onClick={() => navigate("/cart")}
-            sx={{ cursor: "pointer" }}
-          />
+            sx={{
+              p: 1,
+              "&:hover": { backgroundColor: "rgba(219, 68, 68, 0.1)" },
+            }}
+          >
+            <ShoppingCartIcon sx={{ fontSize: 24 }} />
+          </IconButton>
 
-          {isAuthenticated && (
-            <>
-              <IconButton onClick={handleProfileClick}>
-                <Box
-                  bgcolor="#DB4444"
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  borderRadius="50%"
-                  p={1}
-                >
-                  <Person2OutlinedIcon sx={{ color: "white" }} />
-                </Box>
-              </IconButton>
-
-              <Menu
-                anchorEl={anchorEl}
-                open={open}
-                onClose={handleMenuClose}
-                PaperProps={{ elevation: 4, sx: { mt: 1.5, minWidth: 200 } }}
-                transformOrigin={{ horizontal: "right", vertical: "top" }}
-                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+          {/* Auth Section */}
+          {isAuthenticated ? (
+            <IconButton onClick={handleProfileClick}>
+              <Box
+                bgcolor="#DB4444"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                borderRadius="50%"
+                p={1}
+                sx={{ width: 32, height: 32 }}
               >
-                <MenuItem onClick={() => navigate("/account")}>
-                  <ListItemIcon>
-                    <ManageAccountsIcon fontSize="small" />
-                  </ListItemIcon>
-                  Manage My Account
-                </MenuItem>
-                <MenuItem onClick={() => navigate("/orders")}>
-                  <ListItemIcon>
-                    <ShoppingBagIcon fontSize="small" />
-                  </ListItemIcon>
-                  My Orders
-                </MenuItem>
-                <MenuItem onClick={() => navigate("/cancellations")}>
-                  <ListItemIcon>
-                    <CancelIcon fontSize="small" />
-                  </ListItemIcon>
-                  My Cancellations
-                </MenuItem>
-                <MenuItem onClick={() => navigate("/reviews")}>
-                  <ListItemIcon>
-                    <ReviewsIcon fontSize="small" />
-                  </ListItemIcon>
-                  My Reviews
-                </MenuItem>
-                <Divider />
-                <MenuItem
-                  onClick={() => {
-                    logout();
-                    navigate("/auth/login");
-                  }}
-                >
-                  <ListItemIcon>
-                    <LogoutIcon fontSize="small" />
-                  </ListItemIcon>
-                  Logout
-                </MenuItem>
-              </Menu>
-            </>
+                <Person2OutlinedIcon sx={{ color: "white", fontSize: 20 }} />
+              </Box>
+            </IconButton>
+          ) : (
+            <Stack
+              direction="row"
+              spacing={1}
+              sx={{ display: { xs: "none", md: "flex" } }}
+            >
+              <Button
+                onClick={() => navigate("/auth/login")}
+                variant="text"
+                sx={{
+                  textTransform: "none",
+                  color: "text.primary",
+                  minWidth: "auto",
+                  px: 2,
+                }}
+              >
+                Login
+              </Button>
+              <Button
+                onClick={() => navigate("/auth/signup")}
+                variant="outlined"
+                sx={{
+                  textTransform: "none",
+                  borderColor: "#DB4444",
+                  color: "#DB4444",
+                  minWidth: "auto",
+                  px: 2,
+                  "&:hover": {
+                    backgroundColor: "#DB4444",
+                    color: "white",
+                  },
+                }}
+              >
+                Sign Up
+              </Button>
+            </Stack>
           )}
+
+          {/* Mobile Menu Button */}
+          <IconButton
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            sx={{
+              display: { xs: "block", md: "none" },
+              ml: 1,
+              p: 1,
+            }}
+          >
+            {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+          </IconButton>
         </Stack>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <Box
+            sx={{
+              position: "absolute",
+              top: "100%",
+              left: 0,
+              right: 0,
+              bgcolor: "white",
+              boxShadow: 3,
+              zIndex: 1000,
+              display: { xs: "block", md: "none" },
+            }}
+          >
+            <Stack p={3} spacing={2}>
+              {/* Mobile Search */}
+              <TextField
+                placeholder="What are you looking for?"
+                variant="outlined"
+                size="small"
+                fullWidth
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <SearchSharpIcon sx={{ color: "text.secondary" }} />
+                    </InputAdornment>
+                  ),
+                  sx: {
+                    backgroundColor: "#F5F5F5",
+                    borderRadius: 1,
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      border: "none",
+                    },
+                  },
+                }}
+              />
+
+              <Divider />
+
+              {/* Mobile Navigation Links */}
+              {navItems.map((item) => {
+                const isActive = location.pathname === item.path;
+                return (
+                  <Typography
+                    key={item.path}
+                    onClick={() => {
+                      navigate(item.path);
+                      setMobileMenuOpen(false);
+                    }}
+                    sx={{
+                      cursor: "pointer",
+                      color: isActive ? "#DB4444" : "text.primary",
+                      fontWeight: isActive ? 600 : 400,
+                      py: 1,
+                      px: 1,
+                      borderRadius: 1,
+                      transition: "all 0.2s ease",
+                      "&:hover": {
+                        backgroundColor: "rgba(219, 68, 68, 0.1)",
+                        color: "#DB4444",
+                      },
+                    }}
+                  >
+                    {item.label}
+                  </Typography>
+                );
+              })}
+            </Stack>
+          </Box>
+        )}
+
+        {/* User Menu */}
+        <Menu
+          anchorEl={anchorEl}
+          open={open}
+          onClose={handleMenuClose}
+          PaperProps={{
+            elevation: 8,
+            sx: {
+              mt: 1.5,
+              minWidth: 200,
+              borderRadius: 2,
+              "& .MuiMenuItem-root": {
+                borderRadius: 1,
+                mx: 1,
+                my: 0.5,
+              },
+            },
+          }}
+          transformOrigin={{ horizontal: "right", vertical: "top" }}
+          anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+        >
+          <MenuItem
+            onClick={() => {
+              navigate("/account");
+              handleMenuClose();
+            }}
+          >
+            <ListItemIcon>
+              <ManageAccountsIcon fontSize="small" />
+            </ListItemIcon>
+            Manage My Account
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              navigate("/orders");
+              handleMenuClose();
+            }}
+          >
+            <ListItemIcon>
+              <ShoppingBagIcon fontSize="small" />
+            </ListItemIcon>
+            My Orders
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              navigate("/cancellations");
+              handleMenuClose();
+            }}
+          >
+            <ListItemIcon>
+              <CancelIcon fontSize="small" />
+            </ListItemIcon>
+            My Cancellations
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              navigate("/reviews");
+              handleMenuClose();
+            }}
+          >
+            <ListItemIcon>
+              <ReviewsIcon fontSize="small" />
+            </ListItemIcon>
+            My Reviews
+          </MenuItem>
+          <Divider sx={{ my: 1 }} />
+          <MenuItem
+            onClick={() => {
+              logout();
+              navigate("/auth/login");
+              handleMenuClose();
+            }}
+            sx={{ color: "error.main" }}
+          >
+            <ListItemIcon>
+              <LogoutIcon fontSize="small" sx={{ color: "error.main" }} />
+            </ListItemIcon>
+            Logout
+          </MenuItem>
+        </Menu>
       </Stack>
     </Stack>
   );

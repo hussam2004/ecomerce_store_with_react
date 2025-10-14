@@ -34,7 +34,7 @@ export function CheckOutPage() {
     handleSubmit,
     formState: { errors },
   } = useForm<CheckoutFormInputs>({
-    resolver: yupResolver(checkoutSchema),
+    resolver: yupResolver(checkoutSchema) as any,
   });
 
   const [cartItems, setCartItems] = useState<any[]>([]);
@@ -62,7 +62,7 @@ export function CheckOutPage() {
   const shipping = 0;
   const total = subtotal + shipping;
 
-  const onSubmit = (data: CheckoutFormInputs) => {
+  const onSubmit = (data: any) => {
     console.log("✅ Checkout submitted:", data);
     console.log("🛒 Cart items:", cartItems);
     console.log("💰 Total:", total);
@@ -74,13 +74,27 @@ export function CheckOutPage() {
       <CurrentRoute
         text={"Account / My Account / Product / View Cart / CheckOut"}
       />
-      <Typography variant="h4" pl={18} pb={5}>
+      <Typography
+        variant="h4"
+        pl={{ xs: 2, sm: 4, lg: 18 }}
+        pb={5}
+        fontSize={{ xs: 24, sm: 28, lg: 32 }}
+      >
         Billing Details
       </Typography>
 
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Stack direction="row" justifyContent="space-between" pb={15}>
-          <Stack width="40%" pl={18}>
+        <Stack
+          direction={{ xs: "column", lg: "row" }}
+          justifyContent="space-between"
+          pb={15}
+          gap={{ xs: 6, lg: 0 }}
+        >
+          <Stack
+            width={{ xs: "100%", lg: "40%" }}
+            pl={{ xs: 2, sm: 4, lg: 18 }}
+            pr={{ xs: 2, sm: 4, lg: 0 }}
+          >
             <Typography variant="subtitle1" sx={{ color: "rgba(0,0,0,0.4)" }}>
               First Name*
             </Typography>
@@ -156,7 +170,12 @@ export function CheckOutPage() {
           </Stack>
 
           {/* Right Side: Cart Summary */}
-          <Stack pr={18} width="45%" gap={2}>
+          <Stack
+            pr={{ xs: 2, sm: 4, lg: 18 }}
+            pl={{ xs: 2, sm: 4, lg: 0 }}
+            width={{ xs: "100%", lg: "45%" }}
+            gap={2}
+          >
             {cartItems.length > 0 ? (
               cartItems.map((item, index) => (
                 <CheckoutCartItem
@@ -170,7 +189,7 @@ export function CheckOutPage() {
               <Typography>No items in cart</Typography>
             )}
 
-            <Box pr={15}>
+            <Box pr={{ xs: 0, lg: 15 }}>
               <Stack direction="row" justifyContent="space-between" py={3}>
                 <Typography>Subtotal</Typography>
                 <Typography>${subtotal.toFixed(2)}</Typography>
@@ -187,7 +206,11 @@ export function CheckOutPage() {
               </Stack>
             </Box>
 
-            <Stack direction="row" justifyContent="space-between">
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              justifyContent="space-between"
+              gap={{ xs: 3, sm: 0 }}
+            >
               <FormControl>
                 <RadioGroup
                   defaultValue="Cash on Delivery"
@@ -219,7 +242,11 @@ export function CheckOutPage() {
                   />
                 </RadioGroup>
               </FormControl>
-              <Stack direction="row" pr={18}>
+              <Stack
+                direction="row"
+                pr={{ xs: 0, lg: 18 }}
+                justifyContent={{ xs: "center", sm: "flex-start" }}
+              >
                 <Box component="img" src="/payment-methods/1.svg" height={35} />
                 <Box component="img" src="/payment-methods/2.svg" height={35} />
                 <Box component="img" src="/payment-methods/3.svg" height={35} />
@@ -227,12 +254,12 @@ export function CheckOutPage() {
               </Stack>
             </Stack>
 
-            <Stack direction="row" gap={1}>
+            <Stack direction={{ xs: "column", sm: "row" }} gap={1}>
               <TextField
                 id="Coupon"
                 label="Coupon Code"
                 variant="outlined"
-                inputProps={{ sx: { width: 300 } }}
+                sx={{ width: { xs: "100%", sm: 300 } }}
               />
               <Button
                 variant="outlined"
@@ -241,7 +268,7 @@ export function CheckOutPage() {
                   bgcolor: "#DB4444",
                   color: "white",
                   height: 55,
-                  width: 200,
+                  width: { xs: "100%", sm: 200 },
                 }}
               >
                 Apply Coupon
@@ -256,7 +283,7 @@ export function CheckOutPage() {
                 bgcolor: "#DB4444",
                 color: "white",
                 height: 55,
-                width: 200,
+                width: { xs: "100%", sm: 200 },
               }}
             >
               Place Order

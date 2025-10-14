@@ -3,7 +3,17 @@ import Typography from "@mui/material/Typography";
 export function ContactCard() {
   return (
     <>
-      <Stack gap={4} p={5} width={"100%"} pr={0}>
+      <Stack 
+        gap={4} 
+        p={{ xs: 3, sm: 5 }} 
+        width={"100%"} 
+        pr={0}
+        sx={{
+          border: { xs: "1px solid #eee", lg: "none" },
+          borderRadius: { xs: 2, lg: 0 },
+          boxShadow: { xs: 1, lg: "none" }
+        }}
+      >
         <Stack gap={3}>
           <Stack direction={"row"} alignItems={"center"} gap={2}>
             <Box

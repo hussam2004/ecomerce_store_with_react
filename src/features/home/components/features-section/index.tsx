@@ -2,7 +2,13 @@ import { Box, Stack, Typography } from "@mui/material";
 
 export function FeaturesSection() {
   return (
-    <Stack direction={"row"} justifyContent={"center"} gap={10} p={10}>
+    <Stack 
+      direction={{ xs: "column", md: "row" }} 
+      justifyContent={"center"} 
+      gap={{ xs: 4, md: 10 }} 
+      p={{ xs: 4, sm: 6, md: 10 }}
+      alignItems="center"
+    >
       <Stack alignItems={"center"}>
         <Box
           width={70}
@@ -30,10 +36,15 @@ export function FeaturesSection() {
           />
         </Box>
 
-        <Typography fontSize={"20px"} color="initial" fontWeight={"700"}>
+        <Typography 
+          fontSize={{ xs: "16px", sm: "18px", md: "20px" }} 
+          color="initial" 
+          fontWeight={"700"}
+          textAlign="center"
+        >
           FREE AND FAST DELIVERY
         </Typography>
-        <Typography color="initial">
+        <Typography color="initial" textAlign="center" fontSize={{ xs: 14, sm: 16 }}>
           Free delivery for all orders over $140
         </Typography>
       </Stack>
@@ -64,10 +75,15 @@ export function FeaturesSection() {
           />
         </Box>
 
-        <Typography fontSize={"20px"} color="initial" fontWeight={"700"}>
+        <Typography 
+          fontSize={{ xs: "16px", sm: "18px", md: "20px" }} 
+          color="initial" 
+          fontWeight={"700"}
+          textAlign="center"
+        >
           24/7 CUSTOMER SERVICE
         </Typography>
-        <Typography color="initial">Friendly 24/7 customer support</Typography>
+        <Typography color="initial" textAlign="center" fontSize={{ xs: 14, sm: 16 }}>Friendly 24/7 customer support</Typography>
       </Stack>
       <Stack alignItems={"center"}>
         <Box
@@ -96,10 +112,15 @@ export function FeaturesSection() {
           />
         </Box>
 
-        <Typography fontSize={"20px"} color="initial" fontWeight={"700"}>
+        <Typography 
+          fontSize={{ xs: "16px", sm: "18px", md: "20px" }} 
+          color="initial" 
+          fontWeight={"700"}
+          textAlign="center"
+        >
           MONEY BACK GUARANTEE
         </Typography>
-        <Typography color="initial">We reurn money within 30 days</Typography>
+        <Typography color="initial" textAlign="center" fontSize={{ xs: 14, sm: 16 }}>We reurn money within 30 days</Typography>
       </Stack>
     </Stack>
   );

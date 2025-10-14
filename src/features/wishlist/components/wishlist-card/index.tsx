@@ -2,15 +2,16 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 export function WishListCard() {
   return (
-    <Stack gap={1}>
+    <Stack gap={1} width="100%" maxWidth={270}>
       <Box
         sx={{
           backgroundImage: "url('https://i.imgur.com/QkIa5tT.jpeg')",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-          height: 270,
-          width: 250,
+          height: { xs: 200, sm: 250, md: 270 },
+          width: "100%",
+          maxWidth: 270,
           borderRadius: 1,
         }}
       >
@@ -67,16 +68,26 @@ export function WishListCard() {
           </Button>
         </Stack>
       </Box>
-      <Typography fontSize={25} fontWeight={"500"} color="initial">
+      <Typography 
+        fontSize={{ xs: 16, sm: 20, md: 25 }} 
+        fontWeight={"500"} 
+        color="initial"
+        noWrap
+      >
         Gucci duffle bag
       </Typography>
       <Stack direction={"row"} gap={3}>
-        <Typography fontWeight={"500"} color="#db4444">
+        <Typography 
+          fontWeight={"500"} 
+          color="#db4444"
+          fontSize={{ xs: 14, sm: 16 }}
+        >
           960$
         </Typography>
         <Typography
           fontWeight={"500"}
           color="initial"
+          fontSize={{ xs: 14, sm: 16 }}
           sx={{ textDecoration: "line-through", opacity: "0.3" }}
         >
           1100$

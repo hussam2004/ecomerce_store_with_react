@@ -1,4 +1,4 @@
-import type { WidthFull } from "@mui/icons-material";
+
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
 
@@ -24,15 +24,17 @@ export function SpeacialOfferSection({ targetDate }: { targetDate: Date }) {
   return (
     <>
       <Stack
-        mx={16}
-        mr={8}
-        p={2}
-        height={"70vh"}
+        mx={{ xs: 2, sm: 8, md: 16 }}
+        mr={{ xs: 2, sm: 4, md: 8 }}
+        p={{ xs: 2, sm: 3, md: 2 }}
+        height={{ xs: "auto", md: "70vh" }}
+        minHeight={{ xs: 400, md: "70vh" }}
         bgcolor={"black"}
         justifyContent={"space-between"}
-        direction={"row"}
+        direction={{ xs: "column", md: "row" }}
         position={"relative"}
         boxShadow={5}
+        borderRadius={2}
       >
         <Box
           position={"absolute"}
@@ -48,16 +50,32 @@ export function SpeacialOfferSection({ targetDate }: { targetDate: Date }) {
           right={0}
           zIndex={0}
         ></Box>
-        <Stack ml={9} my={3} justifyContent={"space-between"} zIndex={10}>
+        <Stack 
+          ml={{ xs: 2, sm: 4, md: 9 }} 
+          my={3} 
+          justifyContent={"space-between"} 
+          zIndex={10}
+          flex={1}
+          textAlign={{ xs: "center", md: "left" }}
+        >
           <Typography color="#88ff66">Categories</Typography>
-          <Typography variant="h2" color="white">
+          <Typography 
+            color="white"
+            sx={{ fontSize: { xs: "2rem", sm: "2.5rem", md: "3.75rem" } }}
+          >
             Enhance Your Music Experience
           </Typography>
-          <Stack direction={"row"} gap={3} my={2}>
+          <Stack 
+            direction="row" 
+            gap={{ xs: 2, sm: 3 }} 
+            my={2}
+            justifyContent={{ xs: "center", md: "flex-start" }}
+            flexWrap="wrap"
+          >
             <Box
-              width={60}
-              height={60}
-              p={5}
+              width={{ xs: 50, sm: 60 }}
+              height={{ xs: 50, sm: 60 }}
+              p={{ xs: 3, sm: 5 }}
               bgcolor={"white"}
               borderRadius={30}
               display={"flex"}
@@ -66,17 +84,17 @@ export function SpeacialOfferSection({ targetDate }: { targetDate: Date }) {
               flexDirection={"column"}
               gap={0}
             >
-              <Typography color="black" fontWeight={"700"} fontSize={25}>
+              <Typography color="black" fontWeight={"700"} fontSize={{ xs: 18, sm: 25 }}>
                 {timeLeft.days}
               </Typography>
-              <Typography color="black" fontSize={13}>
+              <Typography color="black" fontSize={{ xs: 11, sm: 13 }}>
                 Days
               </Typography>
             </Box>
             <Box
-              width={60}
-              height={60}
-              p={5}
+              width={{ xs: 50, sm: 60 }}
+              height={{ xs: 50, sm: 60 }}
+              p={{ xs: 3, sm: 5 }}
               bgcolor={"white"}
               borderRadius={30}
               display={"flex"}
@@ -85,17 +103,17 @@ export function SpeacialOfferSection({ targetDate }: { targetDate: Date }) {
               flexDirection={"column"}
               gap={0}
             >
-              <Typography color="black" fontWeight={"700"} fontSize={25}>
+              <Typography color="black" fontWeight={"700"} fontSize={{ xs: 18, sm: 25 }}>
                 {timeLeft.hours}
               </Typography>
-              <Typography color="black" fontSize={13}>
+              <Typography color="black" fontSize={{ xs: 11, sm: 13 }}>
                 Hours
               </Typography>
             </Box>
             <Box
-              width={60}
-              height={60}
-              p={5}
+              width={{ xs: 50, sm: 60 }}
+              height={{ xs: 50, sm: 60 }}
+              p={{ xs: 3, sm: 5 }}
               bgcolor={"white"}
               borderRadius={30}
               display={"flex"}
@@ -104,17 +122,17 @@ export function SpeacialOfferSection({ targetDate }: { targetDate: Date }) {
               flexDirection={"column"}
               gap={0}
             >
-              <Typography color="black" fontWeight={"700"} fontSize={25}>
+              <Typography color="black" fontWeight={"700"} fontSize={{ xs: 18, sm: 25 }}>
                 {timeLeft.minutes}
               </Typography>
-              <Typography color="black" fontSize={13}>
+              <Typography color="black" fontSize={{ xs: 11, sm: 13 }}>
                 Minutes
               </Typography>
             </Box>
             <Box
-              width={60}
-              height={60}
-              p={5}
+              width={{ xs: 50, sm: 60 }}
+              height={{ xs: 50, sm: 60 }}
+              p={{ xs: 3, sm: 5 }}
               bgcolor={"white"}
               borderRadius={30}
               display={"flex"}
@@ -123,10 +141,10 @@ export function SpeacialOfferSection({ targetDate }: { targetDate: Date }) {
               flexDirection={"column"}
               gap={0}
             >
-              <Typography color="black" fontWeight={"700"} fontSize={25}>
+              <Typography color="black" fontWeight={"700"} fontSize={{ xs: 18, sm: 25 }}>
                 {timeLeft.seconds}
               </Typography>
-              <Typography color="black" fontSize={13}>
+              <Typography color="black" fontSize={{ xs: 11, sm: 13 }}>
                 Seconds
               </Typography>
             </Box>
@@ -136,17 +154,32 @@ export function SpeacialOfferSection({ targetDate }: { targetDate: Date }) {
             sx={{
               bgcolor: "#00ff66",
               color: "white",
-              width: 170,
-              height: 60,
-              fontSize: 15,
+              width: { xs: 140, sm: 170 },
+              height: { xs: 50, sm: 60 },
+              fontSize: { xs: 14, sm: 15 },
               fontWeight: "600",
+              alignSelf: { xs: "center", md: "flex-start" }
             }}
           >
             Buy Now!
           </Button>
         </Stack>
-        <Box height={"100%"} zIndex={5} ml={"auto"}>
-          <Box component={"img"} src="/enhance-offer.png" />
+        <Box 
+          height={"100%"} 
+          zIndex={5} 
+          ml={"auto"}
+          display={{ xs: "none", md: "block" }}
+          flex={1}
+        >
+          <Box 
+            component={"img"} 
+            src="/enhance-offer.png" 
+            sx={{
+              width: "100%",
+              height: "100%",
+              objectFit: "contain"
+            }}
+          />
         </Box>
       </Stack>
     </>

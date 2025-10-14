@@ -3,10 +3,10 @@ import { HomeSection } from "../../../../shared/components/home-section";
 import ProductService from "../../services/api";
 import { useParams } from "react-router-dom";
 import { ProductCard } from "../product-card";
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 export function RelatedItemsSection() {
   const { id } = useParams();
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryKey: ["product"],
     queryFn: async () => {
       return await ProductService.getRelayedProducts(id);
@@ -23,8 +23,10 @@ export function RelatedItemsSection() {
           pr={18}
           gap={1}
         >
-          {data?.map((e) => {
-            return <ProductCard product={e} offer={0} key={e.id}></ProductCard>;
+          {data?.map((e: any) => {
+            return (
+              <ProductCard product={e} offerAmount={0} key={e.id}></ProductCard>
+            );
           })}
         </Stack>
       </HomeSection>

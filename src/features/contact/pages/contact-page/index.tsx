@@ -7,8 +7,19 @@ export function ContactPage() {
   return (
     <>
       <CurrentRoute text={"Home / Contact"} />
-      <Stack direction={"row"} pb={10}>
-        <Box pl={20} width={"40%"}>
+      <Stack
+        direction={{ xs: "column", lg: "row" }}
+        pb={10}
+        px={{ xs: 2, sm: 4, lg: 0 }}
+        gap={{ xs: 4, lg: 0 }}
+        alignItems={{ xs: "center", lg: "flex-start" }}
+      >
+        <Box
+          sx={{
+            pl: { xs: 0, lg: 20 },
+            width: { xs: "100%", lg: "40%" },
+          }}
+        >
           <ContactCard />
         </Box>
         <ContactForm></ContactForm>

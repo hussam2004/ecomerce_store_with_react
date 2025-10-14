@@ -1,7 +1,7 @@
 // ============================================
 // 1. Custom Hooks: useDebounce.ts
 // ============================================
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 
 export function useDebounce<T>(value: T, delay: number = 300): T {
   const [debouncedValue, setDebouncedValue] = useState<T>(value);
@@ -22,27 +22,68 @@ export function useDebounce<T>(value: T, delay: number = 300): T {
 // ============================================
 // 2. Custom Hooks: useKeyboardShortcut.ts
 // ============================================
-import { useEffect } from "react";
+// import { useEffect } from "react";
+
+// export function useKeyboardShortcut(
+//   key: string,
+//   callback: () => void,
+//   modifiers: { ctrl?: boolean; shift?: boolean; alt?: boolean } = {}
+// ) {
+//   useEffect(() => {
+//     const handler = (e: KeyboardEvent) => {
+//       const ctrlMatch = modifiers.ctrl
+//         ? e.ctrlKey || e.metaKey
+//         : !e.ctrlKey && !e.metaKey;
+//       const shiftMatch = modifiers.shift ? e.shiftKey : !e.shiftKey;
+//       const altMatch = modifiers.alt ? e.altKey : !e.altKey;
+
+//       if (
+//         e.key === key &&
+//         ctrlMatch &&
+//         shiftMatch &&
+//         altMatch &&
+//         !["INPUT", "TEXTAREA"].includes((e.target as HTMLElement).tagName)
+//       ) {
+//         e.preventDefault();
+//         callback();
+//       }
+//     };
+
+//     window.addEventListener("keydown", handler);
+//     return () => window.removeEventListener("keydown", handler);
+//   }, [key, callback, modifiers]);
+// }
+
+type ModifierKeys = {
+  ctrl?: boolean;
+  shift?: boolean;
+  alt?: boolean;
+};
 
 export function useKeyboardShortcut(
   key: string,
   callback: () => void,
-  modifiers: { ctrl?: boolean; shift?: boolean; alt?: boolean } = {}
-) {
+  modifiers: ModifierKeys = {}
+): void {
   useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
+    const handler = (e: KeyboardEvent): void => {
       const ctrlMatch = modifiers.ctrl
         ? e.ctrlKey || e.metaKey
         : !e.ctrlKey && !e.metaKey;
+
       const shiftMatch = modifiers.shift ? e.shiftKey : !e.shiftKey;
+
       const altMatch = modifiers.alt ? e.altKey : !e.altKey;
+
+      const target = e.target as HTMLElement;
+      const isInputField = ["INPUT", "TEXTAREA"].includes(target.tagName);
 
       if (
         e.key === key &&
         ctrlMatch &&
         shiftMatch &&
         altMatch &&
-        !["INPUT", "TEXTAREA"].includes((e.target as HTMLElement).tagName)
+        !isInputField
       ) {
         e.preventDefault();
         callback();
@@ -53,7 +94,6 @@ export function useKeyboardShortcut(
     return () => window.removeEventListener("keydown", handler);
   }, [key, callback, modifiers]);
 }
-
 // ============================================
 // 3. Types: search.types.ts
 // ============================================
@@ -98,7 +138,7 @@ export const searchProducts = async (query: string): Promise<Product[]> => {
 // ============================================
 // 5. Custom Hook: useSearch.ts
 // ============================================
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 
 export function useSearch() {
   const [results, setResults] = useState<Product[]>([]);
@@ -143,7 +183,7 @@ export function useSearch() {
 // ============================================
 // 6. Component: SearchModal.tsx (MUI Version)
 // ============================================
-import React, { useState, useRef, useEffect, KeyboardEvent } from "react";
+import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Dialog,
@@ -157,20 +197,17 @@ import {
   ListItemAvatar,
   ListItemText,
   Avatar,
-  Typography,
-  Box,
   CircularProgress,
-  Chip,
   Alert,
   Divider,
 } from "@mui/material";
 import {
-  Search as SearchIcon,
+  // Search as SearchIcon,
   Clear as ClearIcon,
   KeyboardArrowUp,
   KeyboardArrowDown,
   KeyboardReturn,
-  Close as CloseIcon,
+  // Close as CloseIcon,
 } from "@mui/icons-material";
 
 interface SearchModalProps {
@@ -204,7 +241,7 @@ export function SearchModal({ isOpen, onClose }: SearchModalProps) {
   }, [results]);
 
   // Handle keyboard navigation
-  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     switch (e.key) {
       case "ArrowDown":
         e.preventDefault();

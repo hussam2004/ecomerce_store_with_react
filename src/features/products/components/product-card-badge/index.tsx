@@ -1,6 +1,6 @@
 import { Box, Stack } from "@mui/material";
 
-export function ProductCardBadge({ text, offerAmount }) {
+export function ProductCardBadge({ text, offerAmount }: { text: string; offerAmount: number }) {
   if (text == "new offer") {
     return (
       <>

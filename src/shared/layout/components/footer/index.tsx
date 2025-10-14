@@ -24,8 +24,14 @@ export function Footer() {
         border={"none"}
         color={"white"}
       >
-        <Stack direction={"row"} padding={5} gap={10}>
-          <Stack gap={2}>
+        <Stack 
+          direction={{ xs: "column", md: "row" }} 
+          padding={{ xs: 3, sm: 4, md: 5 }} 
+          gap={{ xs: 4, md: 10 }}
+          alignItems={{ xs: "center", md: "flex-start" }}
+          textAlign={{ xs: "center", md: "left" }}
+        >
+          <Stack gap={2} alignItems={{ xs: "center", md: "flex-start" }}>
             <Typography
               color="white"
               variant="h6"
@@ -72,7 +78,7 @@ export function Footer() {
               }}
             />
           </Stack>
-          <Stack gap={2} width={200}>
+          <Stack gap={2} width={{ xs: "100%", md: 200 }} alignItems={{ xs: "center", md: "flex-start" }}>
             <Typography
               color="white"
               variant="h6"
@@ -90,7 +96,7 @@ export function Footer() {
               +88015-88888-9999
             </Typography>
           </Stack>
-          <Stack>
+          <Stack alignItems={{ xs: "center", md: "flex-start" }}>
             <Typography
               color="white"
               variant="h6"
@@ -114,7 +120,7 @@ export function Footer() {
               Shop
             </Typography>
           </Stack>
-          <Stack>
+          <Stack alignItems={{ xs: "center", md: "flex-start" }}>
             <Typography
               color="white"
               variant="h6"
@@ -135,7 +141,7 @@ export function Footer() {
               Contact
             </Typography>
           </Stack>
-          <Stack>
+          <Stack alignItems={{ xs: "center", md: "flex-start" }}>
             <Typography
               color="white"
               variant="h6"

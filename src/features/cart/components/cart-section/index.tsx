@@ -40,21 +40,21 @@ import { useNavigate } from "react-router-dom";
 // --- END: MOCK COMPONENTS ---
 
 // MOCK dataStorage utility for runnable example
-const dataStorage = (key) => ({
-  get: () => JSON.parse(localStorage.getItem(key)),
-  set: (data) => localStorage.setItem(key, JSON.stringify(data)),
+const dataStorage = (key: string) => ({
+  get: () => JSON.parse(localStorage.getItem(key) || '[]'),
+  set: (data: any) => localStorage.setItem(key, JSON.stringify(data)),
   remove: () => localStorage.removeItem(key),
 });
 
 // --- CART TOTALS CALCULATION LOGIC ---
 const SHIPPING_COST = 0; // Fixed shipping cost
 
-const calculateTotals = (cart) => {
+const calculateTotals = (cart: any[]) => {
   // Calculate the subtotal by iterating over all items
-  const subtotal = cart.reduce((sum, item) => {
+  const subtotal = cart.reduce((sum: number, item: any) => {
     const price = Number(item.price) || 0;
     const quantity = Number(item.quantity) || 0;
-    return sum + price * quantity;
+    return sum + (price * quantity);
   }, 0);
 
   // Total is Subtotal + Shipping Cost
@@ -139,14 +139,19 @@ export function CartSection() {
         <CartTable onDataChange={loadCartTotals}></CartTable>
 
         {/* Update Cart Button - Now calls the reload function */}
-        <Stack direction={"row"} justifyContent={"space-between"} px={18}>
+        <Stack 
+          direction={{ xs: "column", sm: "row" }} 
+          justifyContent={"space-between"} 
+          px={{ xs: 2, sm: 4, md: 18 }}
+          gap={{ xs: 2, sm: 0 }}
+        >
           <Button
             variant="outlined"
             sx={{
               textTransform: "none",
               color: "black",
               borderColor: "rgba(0,0,0,0.3)",
-              width: 200,
+              width: { xs: "100%", sm: 200 },
               height: 50,
             }}
           >
@@ -159,7 +164,7 @@ export function CartSection() {
               textTransform: "none",
               color: "black",
               borderColor: "rgba(0,0,0,0.3)",
-              width: 200,
+              width: { xs: "100%", sm: 200 },
               height: 50,
             }}
           >
@@ -169,20 +174,19 @@ export function CartSection() {
 
         {/* Cart Summary and Coupon Section */}
         <Stack
-          direction={"row"}
+          direction={{ xs: "column", lg: "row" }}
           justifyContent={"space-between"}
-          px={18}
+          px={{ xs: 2, sm: 4, md: 18 }}
           py={5}
+          gap={{ xs: 4, lg: 0 }}
         >
           {/* Coupon Stack (Unchanged) */}
-          <Stack direction={"row"} gap={1}>
+          <Stack direction={{ xs: "column", sm: "row" }} gap={1}>
             <TextField
               id="Coupon"
               label="Coupon Code"
               variant="outlined"
-              inputProps={{
-                sx: { width: 300 },
-              }}
+              sx={{ width: { xs: "100%", sm: 300 } }}
             />
             <Button
               variant="contained"
@@ -191,7 +195,7 @@ export function CartSection() {
                 bgcolor: "#DB4444",
                 color: "white",
                 height: 55,
-                width: 200,
+                width: { xs: "100%", sm: 200 },
                 "&:hover": { bgcolor: "#C0392B" },
               }}
             >
@@ -201,7 +205,7 @@ export function CartSection() {
 
           {/* Cart Total Box - Dynamic Values */}
           <Stack
-            width={350}
+            width={{ xs: "100%", lg: 350 }}
             sx={{ border: "1px solid black", borderRadius: 1, p: 2 }}
           >
             <Typography color="initial" fontSize={25} fontWeight={"500"}>
@@ -219,7 +223,7 @@ export function CartSection() {
             <Stack direction={"row"} justifyContent={"space-between"} py={2}>
               <Typography color="initial">Shipping:</Typography>
               <Typography color="initial">
-                {SHIPPING_COST === 0 ? "Free" : `$${SHIPPING_COST.toFixed(2)}`}
+                {SHIPPING_COST === 0 ? "Free" : `$${SHIPPING_COST}`}
               </Typography>
             </Stack>
             <Divider></Divider>
@@ -239,7 +243,7 @@ export function CartSection() {
                 bgcolor: "#DB4444",
                 color: "white",
                 textTransform: "none",
-                width: 250, // Adjusted width for better centering
+                width: { xs: "100%", sm: 250 },
                 height: 50,
                 alignSelf: "center",
                 fontWeight: "500",

@@ -17,7 +17,7 @@ type LoginFormInputs = {
 };
 
 export default function LoginPage() {
-  const { isAuthenticated, login: authlogin } = useAuth();
+  const { login: authlogin } = useAuth();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -43,7 +43,7 @@ export default function LoginPage() {
   };
 
   return (
-    <Stack gap={2} width={400}>
+    <Stack gap={2} sx={{ width: { xs: "90%", sm: 400 } }} py={10}>
       <Typography variant="h4">Log in to Exclusive</Typography>
       <Typography variant="body2" pb={2}>
         Enter your details below
@@ -86,7 +86,14 @@ export default function LoginPage() {
           >
             Log In
           </Button>
-          <Typography color="#DB4444">Forget Password?</Typography>
+          <Typography
+            color="#DB4444"
+            sx={{
+              fontSize: { xs: 10, sm: 14 },
+            }}
+          >
+            Forget Password?
+          </Typography>
         </Stack>
       </Box>
     </Stack>

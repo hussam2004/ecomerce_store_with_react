@@ -1,12 +1,13 @@
 import "./App.css";
+import "./responsive.css";
 import { AppRouterProvider } from "./routes/provider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { SearchDialog } from "./features/search/components/search-dialog";
+// import { SearchDialog } from "./features/search/components/search-dialog";
 import { AuthProvider } from "./features/auth/store";
-import ScrollToTop from "./shared/components/top-scroll";
+// import ScrollToTop from "./shared/components/top-scroll";
 // import { ProductCard } from "./features/products/components/product-card";
 function App() {
   const queryClient = new QueryClient();

@@ -1,4 +1,4 @@
-import { FindReplace } from "@mui/icons-material";
+// import { FindReplace } from "@mui/icons-material";
 import { Stack, Box, Typography } from "@mui/material";
 
 export function DNewArivalSection() {
@@ -139,34 +139,52 @@ export function DNewArivalSection() {
 export function NewArivalSection() {
   return (
     <>
-      <Box width={"100%"} px={18} pl={0} pt={8}>
-        <Stack direction={"row"} gap={2}>
+      <Box width={"100%"} px={{ xs: 2, sm: 4, md: 18 }} pt={8}>
+        <Stack direction={{ xs: "column", lg: "row" }} gap={2}>
           <Box
-            width={"50%"}
-            height={"100%"}
+            width={{ xs: "100%", lg: "50%" }}
+            height={{ xs: 400, sm: 500, lg: 600 }}
             bgcolor={"black"}
             display={"flex"}
             justifyContent={"center"}
             alignItems={"center"}
             position={"relative"}
+            borderRadius={1}
           >
-            <Box component={"img"} src="/ps5.png" />
+            <Box 
+              component={"img"} 
+              src="/ps5.png" 
+              sx={{
+                width: { xs: "80%", sm: "70%", lg: "auto" },
+                height: { xs: "80%", sm: "70%", lg: "auto" },
+                objectFit: "contain"
+              }}
+            />
             <Stack
               left={0}
-              width={400}
-              p={3}
-              gap={2}
+              width={{ xs: "90%", sm: 400 }}
+              p={{ xs: 2, sm: 3 }}
+              gap={{ xs: 1, sm: 2 }}
               bottom={0}
               position={"absolute"}
             >
-              <Typography fontSize={30} fontWeight={"700"} color="white">
+              <Typography 
+                fontSize={{ xs: 20, sm: 24, md: 30 }} 
+                fontWeight={"700"} 
+                color="white"
+              >
                 PlayStation 5
               </Typography>
-              <Typography color="white">
+              <Typography 
+                color="white"
+                fontSize={{ xs: 12, sm: 14, md: 16 }}
+                sx={{ display: { xs: "none", sm: "block" } }}
+              >
                 Black and White version of the PS5 coming out on sale.
               </Typography>
               <Typography
                 color="white"
+                fontSize={{ xs: 12, sm: 14, md: 16 }}
                 sx={{
                   textDecoration: "underline",
                   cursor: "pointer",
@@ -176,8 +194,8 @@ export function NewArivalSection() {
               </Typography>
             </Stack>
           </Box>
-          <Stack width={"50%"} height={"100%"} gap={1}>
-            <Box width={"100%"} height={"280px"} position={"relative"}>
+          <Stack width={{ xs: "100%", lg: "50%" }} height={"100%"} gap={1}>
+            <Box width={"100%"} height={{ xs: 250, sm: 350, lg: 290 }} position={"relative"} borderRadius={1} overflow="hidden">
               <Box
                 component={"img"}
                 src="/woman.png"
@@ -214,37 +232,51 @@ export function NewArivalSection() {
                 </Typography>
               </Stack>
             </Box>
-            <Stack width={"100%"} height={"50%"} direction={"row"} gap={2}>
+            <Stack width={"100%"} height={{ xs: 400, sm: 300, lg: 290 }} direction={{ xs: "column", sm: "row" }} gap={2}>
               <Box
-                width={"50%"}
-                height={"100%"}
+                width={{ xs: "100%", sm: "50%" }}
+                height={{ xs: 150, sm: "100%" }}
                 bgcolor={"black"}
                 display={"flex"}
                 justifyContent={"center"}
                 alignItems={"center"}
                 position={"relative"}
+                borderRadius={1}
               >
                 <Box
                   component={"img"}
                   src="/speakers.png"
-                  position={"relative"}
+                  sx={{
+                    width: { xs: "60%", sm: "auto" },
+                    height: { xs: "60%", sm: "auto" },
+                    objectFit: "contain"
+                  }}
                 />
                 <Stack
                   left={0}
-                  width={400}
-                  p={3}
+                  width={{ xs: "90%", sm: 200 }}
+                  p={{ xs: 1, sm: 2 }}
                   gap={0}
                   bottom={0}
                   position={"absolute"}
                 >
-                  <Typography fontSize={30} fontWeight={"700"} color="white">
+                  <Typography 
+                    fontSize={{ xs: 14, sm: 18, md: 24 }} 
+                    fontWeight={"700"} 
+                    color="white"
+                  >
                     Speakers
                   </Typography>
-                  <Typography color="white">
+                  <Typography 
+                    color="white"
+                    fontSize={{ xs: 10, sm: 12, md: 14 }}
+                    sx={{ display: { xs: "none", sm: "block" } }}
+                  >
                     Amazon wireless speakers
                   </Typography>
                   <Typography
                     color="white"
+                    fontSize={{ xs: 10, sm: 12, md: 14 }}
                     sx={{
                       textDecoration: "underline",
                       cursor: "pointer",
@@ -255,33 +287,49 @@ export function NewArivalSection() {
                 </Stack>
               </Box>
               <Box
-                width={"50%"}
-                height={"100%"}
+                width={{ xs: "100%", sm: "50%" }}
+                height={{ xs: 150, sm: "100%" }}
                 bgcolor={"black"}
                 display={"flex"}
                 justifyContent={"center"}
                 alignItems={"center"}
                 position={"relative"}
+                borderRadius={1}
               >
                 <Box
                   component={"img"}
-                  position={"relative"}
                   src="/perfume.png"
+                  sx={{
+                    width: { xs: "60%", sm: "auto" },
+                    height: { xs: "60%", sm: "auto" },
+                    objectFit: "contain"
+                  }}
                 />
                 <Stack
                   left={0}
-                  width={400}
-                  p={3}
+                  width={{ xs: "90%", sm: 200 }}
+                  p={{ xs: 1, sm: 2 }}
                   gap={0}
                   bottom={0}
                   position={"absolute"}
                 >
-                  <Typography fontSize={30} fontWeight={"700"} color="white">
+                  <Typography 
+                    fontSize={{ xs: 14, sm: 18, md: 24 }} 
+                    fontWeight={"700"} 
+                    color="white"
+                  >
                     Perfume
                   </Typography>
-                  <Typography color="white">GUCCI INTENSE OUD EDP</Typography>
+                  <Typography 
+                    color="white"
+                    fontSize={{ xs: 10, sm: 12, md: 14 }}
+                    sx={{ display: { xs: "none", sm: "block" } }}
+                  >
+                    GUCCI INTENSE OUD EDP
+                  </Typography>
                   <Typography
                     color="white"
+                    fontSize={{ xs: 10, sm: 12, md: 14 }}
                     sx={{
                       textDecoration: "underline",
                       cursor: "pointer",

@@ -1,4 +1,4 @@
-import { Stack, Button, Typography, Box } from "@mui/material";
+import { Button, Box } from "@mui/material";
 import { HomeSection } from "../../../../shared/components/home-section";
 import { CategoryList } from "../../../categories/components/category-list";
 import { ProductList } from "../../../products/components/product-list";
@@ -9,64 +9,72 @@ import ProductService from "../../../products/services/api";
 import { SpeacialOfferSection } from "../../components/speacial-offer-section";
 import { NewArivalSection } from "../../components/new-arival-section";
 import { ProductListSkeleton } from "../../../products/components/product-list-skeleton";
-import { FlashSaleCountdown } from "../../components/count-down-timer";
+
+// Define or import your Product type
+type Product = {
+  id: string | number;
+  title: string;
+  price: number;
+  images: string[];
+  description?: string;
+  category?: {
+    id: number;
+    name: string;
+    image: string;
+  };
+};
 
 export default function HomePage() {
-  const {
-    data: products,
-    isLoading,
-    isError,
-  } = useQuery({
+  const { data: products = [], isLoading } = useQuery<Product[]>({
     queryKey: ["products"],
     queryFn: async () => {
       return await ProductService.all();
     },
-    onSuccess: (data) => {
-      console.log(data);
-    },
-    onError: (error) => {
-      console.error("Failed to load products:", error);
-    },
   });
+
   return (
     <>
-      <HeroSection></HeroSection>
+      <HeroSection />
       <HomeSection
         sectionTitle="Today’s"
         maintitle="Flash Sales"
         isSale={true}
         saleTo={"2025-10-10T00:00:00"}
       >
-        {/* <FlashSaleCountdown targetDate={new Date("2025-10-10T00:00:00")} /> */}
         {isLoading ? (
           <ProductListSkeleton />
         ) : (
           <ProductList
-            products={Array.isArray(products) ? products.slice(1, 10) : []}
+            products={products.slice(1, 10)}
             isNew={false}
             isOffer={true}
             offerAmount={15}
-          ></ProductList>
+          />
         )}
       </HomeSection>
-      <HomeSection sectionTitle="Categories" maintitle="Browse By Category">
+
+      <HomeSection
+        sectionTitle="Categories"
+        maintitle="Browse By Category"
+        saleTo={""}
+      >
         <CategoryList />
       </HomeSection>
-      {/* <Stack
-        direction={"row"}
-        justifyContent={"space-between"}
-        alignItems={"center"}
-      > */}
-      <HomeSection sectionTitle="This Month" maintitle="Best Selling Products">
+
+      <HomeSection
+        sectionTitle="This Month"
+        maintitle="Best Selling Products"
+        saleTo={undefined}
+      >
         {isLoading ? (
           <ProductListSkeleton />
         ) : (
           <ProductList
-            products={Array.isArray(products) ? products.slice(20, 30) : []}
+            products={products.slice(20, 30)}
             isNew={false}
             isOffer={false}
             offerAmount={0}
-          ></ProductList>
+          />
         )}
         <Box
           sx={{
@@ -81,11 +89,10 @@ export default function HomePage() {
             sx={{
               color: "#FAFAFA",
               bgcolor: "#DB4444",
-              width: "150px",
-
-              height: "50px",
+              width: { xs: "120px", sm: "150px" },
+              height: { xs: "45px", sm: "50px" },
               fontWeight: "500",
-              marginRight: "144px",
+              fontSize: { xs: 14, sm: 16 },
               alignSelf: "center",
             }}
           >
@@ -93,28 +100,34 @@ export default function HomePage() {
           </Button>
         </Box>
       </HomeSection>
-      {/* <ProductList></ProductList> */}
-      {/* </Stack> */}
+
       <SpeacialOfferSection targetDate={new Date("2025-10-10T00:00:00")} />
+
       <HomeSection
-        sectionTitle={"Our Products"}
-        maintitle={"Explore Our Products"}
+        sectionTitle="Our Products"
+        maintitle="Explore Our Products"
       >
         {isLoading ? (
           <ProductListSkeleton />
         ) : (
           <ProductList
-            products={Array.isArray(products) ? products.slice(10, 20) : []}
+            products={products.slice(10, 20)}
             isNew={true}
             isOffer={false}
             offerAmount={0}
-          ></ProductList>
+          />
         )}
       </HomeSection>
-      <HomeSection sectionTitle={"Featured"} maintitle={"New Arrival"}>
+
+      <HomeSection
+        sectionTitle="Featured"
+        maintitle="New Arrival"
+        saleTo={undefined}
+      >
         <NewArivalSection />
       </HomeSection>
-      <FeaturesSection></FeaturesSection>
+
+      <FeaturesSection />
     </>
   );
 }

@@ -9,17 +9,25 @@ export function HeroSection() {
   return (
     <>
       <Stack
-        direction={"row"}
+        direction={{ xs: "column", md: "row" }}
         justifyContent={"space-between"}
         spacing={2}
-        px={10}
-        py={6}
+        px={{ xs: 2, sm: 4, md: 10 }}
+        py={{ xs: 3, md: 6 }}
       >
         <Stack
           flexGrow={1}
           justifyContent={"space-between"}
           sx={{
-            borderRight: "1px solid rgba(0,0,0,0.5)",
+            borderRight: { xs: "none", md: "1px solid rgba(0,0,0,0.5)" },
+            borderBottom: { xs: "1px solid rgba(0,0,0,0.5)", md: "none" },
+            pb: { xs: 2, md: 0 },
+            mb: { xs: 2, md: 0 },
+            display: {
+              xs: "none",
+              sm: "none",
+              md: "flex",
+            },
           }}
         >
           {/* the categories list */}
@@ -41,26 +49,53 @@ export function HeroSection() {
         </Stack>
         <Stack
           bgcolor={"black"}
-          padding={4}
-          width={"55%"}
+          padding={{ xs: 2, sm: 3, md: 4 }}
+          width={{ xs: "100%", md: "55%" }}
           flexGrow={3}
           boxShadow={3}
+          borderRadius={1}
         >
-          <Stack direction={"row"} justifyContent={"space-between"} ml={4}>
-            <Stack spacing={4}>
-              <Stack direction={"row"} spacing={2} alignItems={"center"}>
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            justifyContent={"space-between"}
+            ml={{ xs: 0, sm: 2, md: 4 }}
+            alignItems={{ xs: "center", sm: "flex-start" }}
+            textAlign={{ xs: "center", sm: "left" }}
+          >
+            <Stack spacing={{ xs: 2, md: 4 }} flex={1}>
+              <Stack
+                direction={"row"}
+                spacing={2}
+                alignItems={"center"}
+                justifyContent={{ xs: "center", sm: "flex-start" }}
+              >
                 <AppleIcon
                   fontSize="large"
-                  sx={{ color: "white", fontSize: "50px" }}
+                  sx={{
+                    color: "white",
+                    fontSize: { xs: "30px", sm: "40px", md: "50px" },
+                  }}
                 />
                 <Typography variant="caption" color="white">
                   iPhone 14 Series
                 </Typography>
               </Stack>
-              <Typography variant="h3" width={250} color="white">
+              <Typography
+                color="white"
+                sx={{
+                  maxWidth: { xs: "100%", sm: 250 },
+                  fontSize: { xs: "1.5rem", sm: "2rem", md: "3rem" },
+                  fontWeight: 300,
+                }}
+              >
                 Up to 10% off Voucher
               </Typography>
-              <Stack direction={"row"} spacing={1} alignItems={"center"}>
+              <Stack
+                direction={"row"}
+                spacing={1}
+                alignItems={"center"}
+                justifyContent={{ xs: "center", sm: "flex-start" }}
+              >
                 <Typography
                   variant="caption"
                   color="white"
@@ -75,7 +110,16 @@ export function HeroSection() {
                 <ArrowForwardIcon sx={{ color: "white" }} />
               </Stack>
             </Stack>
-            <Box component={"img"} src="/hero-image.png" width={"50%"} />
+            <Box
+              component={"img"}
+              src="/hero-image.png"
+              sx={{
+                width: { xs: "80%", sm: "50%", md: "50%" },
+                maxWidth: 300,
+                height: "auto",
+                mt: { xs: 2, sm: 0 },
+              }}
+            />
           </Stack>
           <Stack direction={"row"} spacing={1} justifyContent={"center"} mt={2}>
             <CircleOutlinedIcon sx={{ color: "white", fontSize: "15px" }} />

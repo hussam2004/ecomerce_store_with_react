@@ -40,7 +40,7 @@ export default function SignupPage() {
   };
 
   return (
-    <Stack gap={2} width={400}>
+    <Stack gap={2} sx={{ width: { xs: "90%", sm: 400 } }} py={10}>
       <Typography variant="h4">Create an account</Typography>
       <Typography variant="body2" pb={1}>
         Enter your details below
@@ -99,12 +99,16 @@ export default function SignupPage() {
 
       <Button
         variant="outlined"
-        color="default"
-        sx={{ fontSize: 10, padding: 1, textTransform: "none" }}
+        sx={{
+          fontSize: 10,
+          padding: 1,
+          textTransform: "none",
+          borderColor: "black",
+        }}
       >
         <Stack direction="row">
           <Box component="img" src="/Google-icon.svg" pr={1} />
-          <Typography>Sign up with Google</Typography>
+          <Typography color="black">Sign up with Google</Typography>
         </Stack>
       </Button>
       <Stack direction="row" justifyContent="space-evenly">

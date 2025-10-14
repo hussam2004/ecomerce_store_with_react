@@ -13,9 +13,13 @@ export function DefaultLayout() {
         <NavBar />
         <ScrollToTop />
         <SearchDialog></SearchDialog>
-        <div style={{ marginTop: "calc(40px + 72px)" }}>
+        <Box sx={{ 
+          marginTop: { xs: "calc(80px + 60px)", sm: "calc(40px + 72px)" },
+          px: { xs: 1, sm: 2 },
+          flex: 1
+        }}>
           <Outlet />
-        </div>
+        </Box>
         <Footer />
       </Box>
     </>

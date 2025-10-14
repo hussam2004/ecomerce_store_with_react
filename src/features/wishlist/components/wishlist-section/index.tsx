@@ -1,15 +1,17 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { WishListCard } from "../wishlist-card";
-import { useEffect, useState } from "react";
+// import { useState } from "react";
 import { dataStorage } from "../../../../lib/storage";
 import { ProductCard } from "../../../products/components/product-card";
-import { useQuery } from "@tanstack/react-query";
+import type { Product } from "../../../search/components/search-dialog/search";
+// import { useQuery } from "@tanstack/react-query";
 // import { data } from "react-router-dom";
 // import { HomeSection } from "../../../../shared/components/home-section";
-import ProductService from "../../../products/services/api";
+// import ProductService from "../../../products/services/api";
 export function WishListSection() {
-  const [wishlist, setwishlist] = useState(dataStorage("wishlist").get());
-  const [related, setrelated] = useState(dataStorage("wishlist").get());
+  const wishlist = (dataStorage("wishlist").get() as Product[]) || undefined;
+  // const [wishlist, setwishlist] = useState();
+  // const [related, setrelated] = useState(dataStorage("wishlist").get());
 
   // const { data } = useQuery({
   //   queryKey: ["products"],
@@ -21,12 +23,12 @@ export function WishListSection() {
   return (
     <>
       <Stack>
-        <Stack px={18} py={5} gap={3}>
+        <Stack px={{ xs: 2, sm: 4, md: 18 }} py={5} gap={3}>
           <Stack
             direction={"row"}
             justifyContent={"space-between"}
             alignItems={"center"}
-            // flexWrap={"wrap"}
+            gap={{ xs: 2, sm: 0 }}
           >
             <Typography>Wishlist ({wishlist.length})</Typography>
             <Button
@@ -43,18 +45,29 @@ export function WishListSection() {
             </Button>
           </Stack>
           <Stack
-            direction={"row"}
-            justifyContent={"space-around"}
-            flexWrap={"wrap"}
-            gap={2}
+            sx={{
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "1fr",
+                sm: "repeat(2, 1fr)",
+                md: "repeat(3, 1fr)",
+                lg: "repeat(4, 1fr)",
+              },
+              gap: { xs: 2, sm: 3 },
+              justifyItems: "center",
+            }}
           >
-            {wishlist.map((e) => {
+            {wishlist.map((e: any) => {
               return <ProductCard product={e} variant="wishlist"></ProductCard>;
             })}
           </Stack>
         </Stack>
-        <Stack px={18} py={5} gap={3} pb={10}>
-          <Stack direction={"row"} justifyContent={"space-between"}>
+        <Stack px={{ xs: 2, sm: 4, md: 18 }} py={5} gap={3} pb={10}>
+          <Stack
+            direction={"row"}
+            justifyContent={"space-between"}
+            gap={{ xs: 3, sm: 0 }}
+          >
             <Stack direction={"row"} alignItems={"center"}>
               <Box
                 component={"div"}
@@ -63,7 +76,12 @@ export function WishListSection() {
                 height={40}
                 bgcolor={"#DB4444"}
               />
-              <Typography variant="h5" color="initial" pl={2}>
+              <Typography
+                variant="h5"
+                color="initial"
+                pl={2}
+                fontSize={{ xs: 18, sm: 24 }}
+              >
                 Just For You
               </Typography>
             </Stack>
@@ -75,14 +93,26 @@ export function WishListSection() {
                 borderColor: "rgba(0,0,0,0.3)",
                 fontWeight: "500",
                 p: 2,
-                width: 150,
-                height: 60,
+                width: { xs: "40%", sm: 150 },
+                height: { xs: 50, sm: 60 },
               }}
             >
               See All
             </Button>
           </Stack>
-          <Stack direction={"row"} justifyContent={"space-between"}>
+          <Stack
+            sx={{
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "1fr",
+                sm: "repeat(2, 1fr)",
+                md: "repeat(3, 1fr)",
+                lg: "repeat(4, 1fr)",
+              },
+              gap: { xs: 2, sm: 3 },
+              justifyItems: "center",
+            }}
+          >
             {/* <p>{JSON.stringify(data)}</p> */}
             <WishListCard></WishListCard>
             <WishListCard></WishListCard>

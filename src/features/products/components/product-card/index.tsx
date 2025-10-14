@@ -6,16 +6,19 @@ import {
   Typography,
   IconButton,
   Fade,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+// import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { dataStorage } from "../../../../lib/storage";
 import { ProductCardBadge } from "../product-card-badge";
 import { useNavigate } from "react-router-dom";
+import type { Product } from "../../../search/components/search-dialog/search";
 
 const cartStorage = dataStorage("cart");
 const wishlistStorage = dataStorage("wishlist");
@@ -26,27 +29,35 @@ export function ProductCard({
   isOffer = false,
   isNew = false,
   offerAmount = 0,
+}: {
+  product: Product;
+  variant?: string;
+  isOffer?: boolean;
+  isNew?: boolean;
+  offerAmount?: number;
 }) {
   const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [hovered, setHovered] = useState(false);
 
   useEffect(() => {
-    const wishlist = wishlistStorage.get() || [];
-    const exists = wishlist.some((item) => item.id === product.id);
+    const wishlist = (wishlistStorage.get() as Product[]) || [];
+    const exists = wishlist.some((item: any) => item.id === product.id);
     setIsWishlisted(exists);
   }, [product.id]);
 
   const handleAddToCart = () => {
-    const existingCart = cartStorage.get() || [];
+    const existingCart = (cartStorage.get() as Product[]) || [];
     const updatedCart = [...existingCart, product];
     cartStorage.set(updatedCart);
     toast.success("Added to cart!");
   };
 
   const toggleWishlist = () => {
-    const wishlist = wishlistStorage.get() || [];
-    const exists = wishlist.some((item) => item.id === product.id);
+    const wishlist = (wishlistStorage.get() as Product[]) || [];
+    const exists = wishlist.some((item: any) => item.id === product.id);
     const updated = exists
       ? wishlist.filter((item) => item.id !== product.id)
       : [...wishlist, product];
@@ -58,7 +69,7 @@ export function ProductCard({
   };
 
   const removeFromWishlist = () => {
-    const wishlist = wishlistStorage.get() || [];
+    const wishlist = (wishlistStorage.get() as Product[]) || [];
     const updated = wishlist.filter((item) => item.id !== product.id);
     wishlistStorage.set(updated);
     toast.info("Removed from wishlist");
@@ -72,7 +83,12 @@ export function ProductCard({
   };
 
   return (
-    <Stack sx={{ height: 350, width: 270 }} gap={1} borderRadius={2}>
+    <Stack sx={{ 
+      height: { xs: 300, sm: 350 }, 
+      width: { xs: "100%", sm: 270 },
+      maxWidth: 270,
+      minWidth: { xs: 250, sm: 270 }
+    }} gap={1} borderRadius={2}>
       <Box
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -81,8 +97,9 @@ export function ProductCard({
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
-          height: 250,
-          width: 270,
+          height: { xs: 200, sm: 250 },
+          width: "100%",
+          maxWidth: 270,
           borderRadius: 2,
           position: "relative",
         }}
@@ -90,7 +107,7 @@ export function ProductCard({
         <Stack justifyContent="space-between" height="100%">
           <Stack direction="row" justifyContent="space-between">
             <ProductCardBadge text={evalBadge()} offerAmount={offerAmount} />
-            <Fade in={hovered || variant === "wishlist"}>
+            <Fade in={hovered || variant === "wishlist" || isMobile}>
               <Stack direction="column" spacing={1} p={1} sx={{ ml: "auto" }}>
                 {variant === "wishlist" ? (
                   <IconButton
@@ -126,7 +143,7 @@ export function ProductCard({
             </Fade>
           </Stack>
 
-          <Fade in={hovered || variant === "wishlist"}>
+          <Fade in={hovered || variant === "wishlist" || isMobile}>
             <Button
               sx={{ textTransform: "none", bgcolor: "black", color: "white" }}
               fullWidth
